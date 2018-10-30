@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<style type="text/css">
+  @font-face {
+    font-family: "My Custom Font";
+    src: url(http://www.example.org/mycustomfont.ttf) format("truetype");
+  }
+
+  /*
+  body {
+    background-color:  #a3d5d3;
+  }
+  */
+
+  p.quote {
+    text-align: justify;
+    text-justify: inter-word;
+    font-family: "My Custom Font", Verdana, Tahoma;
+  }
+
+  h1.mainHeading {
+    font-family: Verdana, Tahoma;
+  }
+
+  #map {
+    height: 100%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 90%;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+   margin: 0;
+   padding: 0;
+  }
+  .imgbox {
+   display: grid;
+   height: 100%;
+  }
+  .center-fit {
+   max-width: 100%;
+   max-height: 100vh;
+   margin: auto;
+  }
+
+</style>
+
+<html>
+  <head>
+    <title>Seattle Mental Health Groups
+    </title>
+    <meta name="viewport" content="initial-scale=1.0">
+  </head>
+  <body>
+    <strong>
+      <h1 class="mainHeading">Seattle Mental Health Groups</h1>
+      <!--
+       <div class="imgbox">
+        <img class="center-fit"
+          src="https://www.nami.org/NAMI/media/NAMI-Media/Images/Logos/JPGLogos/nami-logo-blue.jpg"
+          alt="NAMI">
+      </div>
+      -->
+    </strong>
+    <p class="quote">"A human being should be able to change a diaper, plan an invasion,
+      butcher a hog, conn a ship, design a building, write a sonnet, balance
+      accounts, build a wall, set a bone, comfort the dying, take orders, give
+      orders, cooperate, act alone, solve equations, analyze a new problem,
+      pitch manure, program a computer, cook a tasty meal, fight efficiently,
+      die gallantly. Specialization is for insects."
+      <br />
+      <br />
+    -Robert A. Heinlein</p>
+    <div id="map"></div>
+    <script>
+      var map;
+      var locationSeattle = {lat: 47.6062, lng: -122.3321};
+      function initMap() {
+        var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+      'sandstone rock formation in the southern part of the '+
+      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+      'south west of the nearest large town, Alice Springs; 450&#160;km '+
+      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+      'Aboriginal people of the area. It has many springs, waterholes, '+
+      'rock caves and ancient paintings. Uluru is listed as a World '+
+      'Heritage Site.</p>'+
+      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+      '(last visited June 22, 2009).</p>'+
+      '</div>'+
+      '</div>';
+
+        /*var uwGroup = '<div id = "content">' +
+      '<div id ="siteNotice">'+
+      '</div>'+
+      */
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: locationSeattle,
+          zoom: 10,
+          gestureHandling: 'cooperative'
+        });
+
+        var infowindow= new google.maps.InfoWindow({
+          content: contentString
+        })
+
+        var marker = new google.maps.Marker({
+          position: locationSeattle,
+          map: map,
+          title: 'Hello World!'
+        })
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEdwEtKp09b0fT34oYmeFw4DwLxxYafgQ&callback=initMap"
+    async defer></script>
+  </body>
+</html>
